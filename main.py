@@ -50,15 +50,8 @@ def check_lines():
     
     
 
-def check_collision():
-    for part in object_parts:
-        if part[1] >= height - height/10:
-            return True
-        if part[0] <= width/10 or part[0] >= width - width/10 - pixel_size:
-            return True
-        if map[part[0], part[1]] == (255, 255, 255):
-            return True
-    return False
+def check_collision(object_parts):
+    pass
 
 def remove_line():
     pass
@@ -117,7 +110,7 @@ while active:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 for part in object_parts:
-                    part[0] -= pixel_size
+                    object_parts[part] = list(part)[0] - pixel_size
             if event.key == pygame.K_RIGHT:
                 for part in object_parts:
                     part[0] += pixel_size
@@ -133,11 +126,11 @@ while active:
         object_parts = next_piece()
     else:
         object_parts = move(object_parts)
-        if check_collision(object_parts):
-            for part in object_parts:
-                map[part[0], part[1]] = (255, 255, 255)
-            object_parts.clear()
-            check_lines()
+        #if check_collision(object_parts):
+         #   for part in object_parts:
+          #      map[part[0], part[1]] = (255, 255, 255)
+           # object_parts.clear()
+            #check_lines()
             #if game_over():
              #   active = False
         
